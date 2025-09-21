@@ -636,7 +636,7 @@
         `;
         
         try {
-            const response = await fetch(`http://127.0.0.1:5000/api/competitions/${encodeURIComponent(name)}/competitors`);
+            const response = await fetch(`http://markidk123.pythonanywhere.com/api/competitions/${encodeURIComponent(name)}/competitors`);
             if (!response.ok) {
                 throw new Error('Failed to fetch competitors for this competition.');
             }
@@ -694,7 +694,7 @@
         const message = document.getElementById('loginMessage');
         
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/login', {
+            const response = await fetch('http://markidk123.pythonanywhere.com/api/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -749,7 +749,7 @@
         }
 
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/signup', {
+            const response = await fetch('http://markidk123.pythonanywhere.com/api/signup', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ password: password })
@@ -785,7 +785,7 @@
         competitorList.innerHTML = '';
         
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/competitors');
+            const response = await fetch('http://markidk123.pythonanywhere.com/api/competitors');
             allCompetitors = await response.json();
 
             // Filter the list based on the search query
@@ -842,7 +842,7 @@
         }
 
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/competitors/add', {
+            const response = await fetch('http://markidk123.pythonanywhere.com/api/competitors/add', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name: newName, id: newId, status: newStatus, nationality: newNationality })
@@ -869,7 +869,7 @@
             return;
         }
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/competitors/remove', {
+            const response = await fetch('http://markidk123.pythonanywhere.com/api/competitors/remove', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ id: id })
@@ -914,17 +914,17 @@
         }
 
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/competitors/edit', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    original_id: originalId,
-                    new_name: newName,
-                    new_id: newId,
-                    new_status: newStatus,
-                    new_nationality: newNationality
-                })
-            });
+                const response = await fetch('http://markidk123.pythonanywhere.com/api/competitors/edit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        original_id: originalId,
+                        new_name: newName,
+                        new_id: newId,
+                        new_status: newStatus,
+                        new_nationality: newNationality
+                    })
+                });
             const result = await response.json();
 
             if (result.success) {
@@ -949,7 +949,7 @@
         modal.style.display = 'flex';
 
         try {
-            const response = await fetch(`http://127.0.0.1:5000/api/competitors/${encodeURIComponent(competitorId)}/profile`);
+            const response = await fetch('http://markidk123.pythonanywhere.com/api/competitors/' + encodeURIComponent(competitorId) + '/profile');
             if (!response.ok) {
                 throw new Error('Failed to fetch competitor profile.');
             }
@@ -992,7 +992,7 @@
         userList.innerHTML = '';
         
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/users');
+            const response = await fetch('http://markidk123.pythonanywhere.com/api/users');
             const users = await response.json();
 
             users.forEach(user => {
@@ -1016,7 +1016,7 @@
         }
 
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/users/add', {
+            const response = await fetch('http://markidk123.pythonanywhere.com/api/users/add', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ password: newPassword, role: newRole })
@@ -1040,7 +1040,7 @@
             return;
         }
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/users/remove', {
+            const response = await fetch('http://markidk123.pythonanywhere.com/api/users/remove', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ password: password })
@@ -1067,7 +1067,7 @@
         competitionsGrid.innerHTML = '';
 
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/competitions');
+            const response = await fetch('http://markidk123.pythonanywhere.com/api/competitions');
             const allCompetitions = await response.json();
 
             allCompetitions.forEach(comp => {
@@ -1126,7 +1126,7 @@
         }
 
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/competitions/add', {
+            const response = await fetch('http://markidk123.pythonanywhere.com/api/competitions/add', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name, date, location, description })
@@ -1151,7 +1151,7 @@
             return;
         }
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/competitions/remove', {
+            const response = await fetch('http://markidk123.pythonanywhere.com/api/competitions/remove', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name: name })
@@ -1197,7 +1197,7 @@
         const newStatus = document.getElementById('editedCompetitionStatus').value;
 
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/competitions/edit', {
+            const response = await fetch('http://markidk123.pythonanywhere.com/api/competitions/edit', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -1259,7 +1259,7 @@
         }
 
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/competitions/add_competitor', {
+            const response = await fetch('http://markidk123.pythonanywhere.com/api/competitions/add_competitor', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ competition_name: competitionName, competitor_id: competitorId })
