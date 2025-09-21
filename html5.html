@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOVATEAM</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            background-color: #0d1117;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+        }
+        .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #007bff;
+        }
+        .logo .white-text {
+            color: #ffffff;
+        }
+        .nav-menu {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 25px;
+        }
+        .nav-menu a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .nav-menu a:hover {
+            color: #007bff;
+        }
+        /* Hero Section */
+        .hero-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            height: calc(100vh - 80px);
+            padding: 0 20px;
+        }
+        .hero-title {
+            font-size: 3.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .hero-subtitle {
+            font-size: 1.2em;
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+        .cta-button {
+            padding: 12px 25px;
+            font-size: 1em;
+            font-weight: bold;
+            color: #00bcd4;
+            background-color: transparent;
+            border: 2px solid #00bcd4;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            cursor: pointer;
+        }
+        .cta-button:hover {
+            background-color: #00bcd4;
+            color: #ffffff;
+        }
+        /* Competitions Section */
+        .competitions-section {
+            padding: 50px 20px;
+            text-align: center;
+            background-color: #1a202c;
+        }
+        .competitions-section h2 {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 40px;
+        }
+        .competitions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .competition-card {
+            background-color: #0d1117;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            text-align: left;
+        }
+        .competition-card h3 {
+            font-size: 1.5em;
+            margin-top: 0;
+            color: #007bff;
+        }
+        .competition-card p {
+            font-size: 0.9em;
+            color: #b0b0b0;
+            line-height: 1.5;
+        }
+        .competition-card .details-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+        .competition-card .details-btn:hover {
+            background-color: #0056b3;
+        }
+        .competition-card button {
+            margin-top: 15px;
+            margin-left: 5px;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: #1a202c;
+            color: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 500px;
+            position: relative;
+            text-align: left;
+        }
+        .close-button {
+            color: #aaa;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .modal-title {
+            font-size: 2em;
+            color: #007bff;
+            margin-top: 0;
+        }
+        .modal-details p {
+            font-size: 1.1em;
+            margin: 10px 0;
+        }
+        /* Employee Section */
+        .employee-section {
+            padding: 50px 20px;
+            background-color: #0d1117;
+            display: none;
+        }
+        .employee-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: left;
+        }
+        .employee-section h2 {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        /* Login/Signup Modal specific styles */
+        .login-signup-toggle {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9em;
+        }
+        .login-signup-toggle a {
+            color: #007bff;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+        .login-form input, .signup-form input {
+            padding: 10px;
+            width: calc(100% - 22px);
+            border: 1px solid #333;
+            border-radius: 5px;
+            background-color: #0d1117;
+            color: white;
+            margin-bottom: 10px;
+        }
+        .login-form button, .signup-form button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+        .login-form button:hover, .signup-form button:hover {
+            background-color: #0056b3;
+        }
+        /* User Management styles */
+        .user-management {
+            background-color: #1a202c;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+        .user-management h3 {
+            margin-top: 0;
+        }
+        .user-list {
+            list-style: none;
+            padding: 0;
+        }
+        .user-list li {
+            background-color: #0d1117;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .user-list button {
+            padding: 5px 10px;
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .user-list button:hover {
+            background-color: #c82333;
+        }
+        .user-form input, .user-form select {
+            padding: 8px;
+            margin-right: 10px;
+            background-color: #0d1117;
+            color: white;
+            border: 1px solid #333;
+            border-radius: 4px;
+        }
+        .user-form button {
+            padding: 8px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .user-form button:hover {
+            background-color: #218838;
+        }
+        .add-competition-form input, .edit-form input {
+            width: 90%;
+            padding: 8px;
+            margin-bottom: 10px;
+            background-color: #0d1117;
+            color: white;
+            border: 1px solid #333;
+            border-radius: 4px;
+        }
+        .add-competition-form button, .edit-form button {
+            padding: 8px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .remove-btn {
+            background-color: #dc3545;
+        }
+        .remove-btn:hover {
+            background-color: #c82333;
+        }
+        .edit-btn {
+            background-color: #007bff;
+        }
+        .edit-btn:hover {
+            background-color: #0056b3;
+        }
+        .view-btn {
+            background-color: #00bcd4;
+            margin-left: 5px;
+        }
+        .view-btn:hover {
+            background-color: #00a4b3;
+        }
+        /* Styles for competition status */
+        .status-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .status-upcoming {
+            background-color: #007bff;
+            color: #ffffff;
+        }
+        .status-in-progress {
+            background-color: #ffc107;
+            color: #000000;
+        }
+        .status-completed {
+            background-color: #28a745;
+            color: #ffffff;
+        }
+        /* Styles for competitor status */
+        .competitor-status-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .competitor-status-active {
+            background-color: #28a745;
+            color: #ffffff;
+        }
+        .competitor-status-coach {
+            background-color: #00bcd4;
+            color: #ffffff;
+        }
+        .competitor-status-retired {
+            background-color: #dc3545;
+            color: #ffffff;
+        }
+        /* Search Bar Styles */
+        .search-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .search-container input {
+            width: 60%;
+            max-width: 500px;
+            padding: 10px;
+            border: 1px solid #333;
+            border-radius: 5px;
+            background-color: #0d1117;
+            color: white;
+            font-size: 1em;
+        }
+    </style>
+</head>
+<body onload="loadCompetitions()">
+
+<div class="header">
+    <div class="logo">NOVA<span class="white-text">TEAM</span></div>
+    <ul class="nav-menu">
+        <li><a href="#competitions">Competitions</a></li>
+        <li><a href="#">Scoreboard</a></li>
+        <li><a href="#">Resources</a></li>
+        <li><a href="#" onclick="showLoginModal()">Employees</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</div>
+
+<div class="hero-section">
+    <h1 class="hero-title">Unleash Your Potential</h1>
+    <p class="hero-subtitle">
+        NOVATEAM is a platform where skill meets innovation. Join our community to test your limits and achieve greatness.
+    </p>
+    <a href="#competitions" class="cta-button">GET STARTED</a>
+</div>
+
+<div id="competitions" class="competitions-section">
+    <h2>Upcoming Competitions</h2>
+    <div class="search-container">
+        <input type="text" id="competitionSearch" onkeyup="filterCompetitions()" placeholder="Search for competitions...">
+    </div>
+    <div id="competitionsGrid" class="competitions-grid">
+        </div>
+</div>
+
+<div id="detailsModal" class="modal">
+    <div class="modal-content">
+        <span class="close-button" onclick="hideDetails()">&times;</span>
+        <h2 id="modal-title" class="modal-title"></h2>
+        <div id="modal-details" class="modal-details"></div>
+    </div>
+</div>
+
+<div id="editModal" class="modal">
+    <div class="modal-content">
+        <span class="close-button" onclick="hideEditModal()">&times;</span>
+        <h2 class="modal-title">Edit Competition</h2>
+        <div class="edit-form">
+            <input type="text" id="editedCompetitionName" placeholder="New Name">
+            <input type="text" id="editedCompetitionDate" placeholder="New Date">
+            <input type="text" id="editedCompetitionLocation" placeholder="New Location">
+            <input type="text" id="editedCompetitionDescription" placeholder="New Description">
+            <select id="editedCompetitionStatus">
+                <option value="Upcoming">Upcoming</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Completed">Completed</option>
+            </select>
+            <input type="hidden" id="originalCompetitionName">
+            <button onclick="editCompetition()">Save Changes</button>
+            <button onclick="showAddCompetitorModal()">Add Competitor</button>
+        </div>
+    </div>
+</div>
+
+<div id="editCompetitorModal" class="modal">
+    <div class="modal-content">
+        <span class="close-button" onclick="hideEditCompetitorModal()">&times;</span>
+        <h2 class="modal-title">Edit Competitor</h2>
+        <div class="edit-form">
+            <input type="text" id="editedCompetitorName" placeholder="New Name">
+            <input type="text" id="editedCompetitorId" placeholder="New ID">
+            <select id="editedCompetitorStatus">
+                <option value="Active">Active</option>
+                <option value="Coach">Coach</option>
+                <option value="Retired">Retired</option>
+            </select>
+            <input type="text" id="editedCompetitorNationality" placeholder="New Nationality">
+            <input type="hidden" id="originalCompetitorId">
+            <button onclick="editCompetitor()">Save Changes</button>
+        </div>
+    </div>
+</div>
+
+<div id="competitorProfileModal" class="modal">
+    <div class="modal-content">
+        <span class="close-button" onclick="hideCompetitorProfileModal()">&times;</span>
+        <h2 id="profileModalTitle" class="modal-title"></h2>
+        <div id="profileModalDetails" class="modal-details"></div>
+    </div>
+</div>
+
+<div id="loginModal" class="modal">
+    <div class="modal-content">
+        <span class="close-button" onclick="hideLoginModal()">&times;</span>
+        <div id="loginForm" class="login-form">
+            <h2 class="modal-title">Employee Login</h2>
+            <p>Please enter your password to continue:</p>
+            <input type="password" id="passwordInput" placeholder="Password">
+            <button onclick="checkPassword()">Log In</button>
+            <p id="loginMessage" style="color: red; margin-top: 10px; display: none;"></p>
+            <div class="login-signup-toggle">
+                Don't have an account? <a onclick="showSignupForm()">Sign Up</a>
+            </div>
+        </div>
+        <div id="signupForm" class="signup-form" style="display: none;">
+            <h2 class="modal-title">Sign Up</h2>
+            <p>Create a new account to join NOVATEAM.</p>
+            <input type="password" id="signupPasswordInput" placeholder="New Password">
+            <button onclick="signupUser()">Sign Up</button>
+            <p id="signupMessage" style="color: red; margin-top: 10px; display: none;"></p>
+            <div class="login-signup-toggle">
+                Already have an account? <a onclick="showLoginForm()">Log In</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="addCompetitorModal" class="modal">
+    <div class="modal-content">
+        <span class="close-button" onclick="hideAddCompetitorModal()">&times;</span>
+        <h2 class="modal-title">Assign Competitor to a Competition</h2>
+        <p>Select a competitor to add to the **<span id="competitionNameInAddModal"></span>** competition.</p>
+        <select id="addCompetitorSelect">
+            <option value="">-- Select Competitor --</option>
+        </select>
+        <button onclick="addCompetitorToCompetition()">Assign</button>
+        <input type="hidden" id="competitionNameToAddCompetitor">
+    </div>
+</div>
+
+<div id="profileSection" class="employee-section">
+    <div class="employee-content">
+        <h2 id="profileTitle"></h2>
+        <p><strong>Your Role:</strong> <span id="profileRole"></span></p>
+        <p>This is your personal dashboard. From here, you can access content and tools based on your access level.</p>
+    </div>
+</div>
+
+<div id="generalEmployeeSection" class="employee-section">
+    <div class="employee-content">
+        <h2>Welcome, NOVATEAM!</h2>
+        <p>This is your private portal for all things related to your work at NOVA. Stay up to date with company news, upcoming events, and important resources.</p>
+        <h3>Company News</h3>
+        <ul>
+            <li><strong>March 15, 2025:</strong> We are excited to announce our new partnership with the Sports Marketing Agency!</li>
+            <li><strong>February 28, 2025:</strong> A big thank you to everyone for a successful Winter Grand Prix. Great work, team!</li>
+        </ul>
+        <h3>Upcoming Assignments</h3>
+        <p>Check your personal calendar for specific roles and times for the Spring Cup Championship.</p>
+        <h3>Important Documents</h3>
+        <ul>
+            <li><a href="#" style="color:#007bff; text-decoration:none;">Employee Handbook (PDF)</a></li>
+            <li><a href="#" style="color:#007bff; text-decoration:none;">2025 Payroll Schedule</a></li>
+        </ul>
+    </div>
+</div>
+<div id="managerSection" class="employee-section">
+    <div class="employee-content">
+        <h2>Manager Portal</h2>
+        <p>This section contains confidential resources for managers only. Please use this information responsibly.</p>
+        <h3>Team Performance Reports</h3>
+        <p>Access and analyze your team's performance metrics from recent competitions. Use this data to provide feedback and improve strategy.</p>
+        <h3>Manager Resources</h3>
+        <ul>
+            <li><a href="#" style="color:#00bcd4; text-decoration:none;">Team Assignment Roster (Excel)</a></li>
+            <li><a href="#" style="color:#00bcd4; text-decoration:none;">Quarterly Budget Report</a></li>
+            <li><a href="#" style="color:#00bcd4; text-decoration:none;">Manager Training Videos</a></li>
+        </ul>
+    </div>
+</div>
+
+<div id="adminSection" class="employee-section">
+    <div class="employee-content">
+        <h2>Admin Portal</h2>
+        <p>This section is for administrators only and includes highly confidential company and system data. </p>
+        
+        <div class="user-management">
+            <h3>Competitor Management</h3>
+            <p>Add, remove, or edit competitor details.</p>
+            <div class="user-form">
+                <input type="text" id="newCompetitorName" placeholder="Competitor Name">
+                <input type="text" id="newCompetitorId" placeholder="Competitor ID (e.g., TEAM-A1)">
+                <input type="text" id="newCompetitorNationality" placeholder="Nationality">
+                <select id="newCompetitorStatus">
+                    <option value="Active">Active</option>
+                    <option value="Coach">Coach</option>
+                    <option value="Retired">Retired</option>
+                </select>
+                <button onclick="addCompetitor()">Add Competitor</button>
+            </div>
+
+            <div class="search-container" style="margin-top: 20px;">
+                <input type="text" id="competitorSearch" onkeyup="filterCompetitors()" placeholder="Search competitors...">
+            </div>
+            
+            <h4>Current Competitors</h4>
+            <ul id="competitorList" class="user-list">
+                </ul>
+        </div>
+        
+        <div class="user-management">
+            <h3>User Management</h3>
+            <p>Add or remove users by entering their new password and role below.</p>
+            <div class="user-form">
+                <input type="text" id="newUserPassword" placeholder="New Password">
+                <select id="newUserRole">
+                    <option value="general">General</option>
+                    <option value="manager">Manager</option>
+                    <option value="admin">Admin</option>
+                </select>
+                <button onclick="addUser()">Add User</button>
+            </div>
+            
+            <h4>Current Users</h4>
+            <ul id="userList" class="user-list">
+                </ul>
+        </div>
+        
+        <div class="user-management">
+            <h3>Add New Competition</h3>
+            <div class="add-competition-form">
+                <input type="text" id="competitionName" placeholder="Competition Name">
+                <input type="text" id="competitionDate" placeholder="Date (e.g., Dec 1, 2025)">
+                <input type="text" id="competitionLocation" placeholder="Location">
+                <input type="text" id="competitionDescription" placeholder="Description">
+                <button onclick="addCompetition()">Add Competition</button>
+            </div>
+        </div>
+
+        <h3>System Status</h3>
+        <p>All systems are currently operational. No new alerts to report.</p>
+
+        <h3>Confidential Documents</h3>
+        <p>Access restricted financial and legal documents here.</p>
+    </div>
+</div>
+
+<script>
+    let currentUserRole = null; // Variable to store the user's role
+    let allCompetitors = []; // Global list of all competitors
+
+    // --- JavaScript for Competition Details Modal ---
+    async function showDetails(name, date, location, description, status) {
+        const modal = document.getElementById('detailsModal');
+        const title = document.getElementById('modal-title');
+        const details = document.getElementById('modal-details');
+        
+        title.textContent = name;
+        details.innerHTML = `
+            <p><strong>Date:</strong> ${date}</p>
+            <p><strong>Location:</strong> ${location}</p>
+            <p><strong>Description:</strong> ${description}</p>
+            <p><strong>Status:</strong> ${status}</p>
+            <h4>Participating Competitors:</h4>
+            <ul id="competitors-list"></ul>
+        `;
+        
+        try {
+            const response = await fetch(`http://127.0.0.1:5000/api/competitions/${encodeURIComponent(name)}/competitors`);
+            if (!response.ok) {
+                throw new Error('Failed to fetch competitors for this competition.');
+            }
+            const competitors = await response.json();
+            const competitorsList = document.getElementById('competitors-list');
+            
+            if (competitors.length > 0) {
+                competitors.forEach(comp => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `${comp.name} (${comp.nationality})`;
+                    competitorsList.appendChild(listItem);
+                });
+            } else {
+                competitorsList.innerHTML = '<li>No competitors assigned yet.</li>';
+            }
+        } catch (error) {
+            console.error('Error fetching competitors:', error);
+            const competitorsList = document.getElementById('competitors-list');
+            competitorsList.innerHTML = '<li>Error loading competitors.</li>';
+        }
+        
+        modal.style.display = 'flex';
+    }
+    
+    function hideDetails() {
+        document.getElementById('detailsModal').style.display = 'none';
+    }
+
+    // --- JavaScript for Login/Signup Modal ---
+    function showLoginModal() {
+        document.getElementById('loginModal').style.display = 'flex';
+        showLoginForm();
+    }
+    function hideLoginModal() {
+        document.getElementById('loginModal').style.display = 'none';
+        document.getElementById('passwordInput').value = '';
+        document.getElementById('signupPasswordInput').value = '';
+        document.getElementById('loginMessage').style.display = 'none';
+        document.getElementById('signupMessage').style.display = 'none';
+    }
+    function showLoginForm() {
+        document.getElementById('loginForm').style.display = 'block';
+        document.getElementById('signupForm').style.display = 'none';
+        document.getElementById('loginMessage').style.display = 'none';
+    }
+    function showSignupForm() {
+        document.getElementById('loginForm').style.display = 'none';
+        document.getElementById('signupForm').style.display = 'block';
+        document.getElementById('signupMessage').style.display = 'none';
+    }
+
+    // Function to handle the password check by sending it to the backend
+    async function checkPassword() {
+        const password = document.getElementById('passwordInput').value;
+        const message = document.getElementById('loginMessage');
+        
+        try {
+            const response = await fetch('http://127.0.0.1:5000/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ password: password })
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                hideAllEmployeeSections();
+                const role = result.role;
+                currentUserRole = role; // Store the role globally
+                
+                // Show the profile page for any successful login
+                document.getElementById('profileTitle').textContent = `Welcome, ${password}!`;
+                document.getElementById('profileRole').textContent = role.toUpperCase();
+                document.getElementById('profileSection').style.display = 'block';
+                window.location.hash = 'profileSection';
+                
+                // Then, show the appropriate role-based section
+                if (role === 'general') {
+                    document.getElementById('generalEmployeeSection').style.display = 'block';
+                } else if (role === 'manager') {
+                    document.getElementById('managerSection').style.display = 'block';
+                } else if (role === 'admin') {
+                    document.getElementById('adminSection').style.display = 'block';
+                    displayUsers();
+                    displayCompetitors();
+                }
+                hideLoginModal();
+                loadCompetitions(); // Reload competitions to show or hide admin buttons
+            } else {
+                message.textContent = result.message;
+                message.style.display = 'block';
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            message.textContent = "Could not connect to the server. Please ensure the backend is running.";
+            message.style.display = 'block';
+        }
+    }
+
+    async function signupUser() {
+        const password = document.getElementById('signupPasswordInput').value;
+        const message = document.getElementById('signupMessage');
+        
+        if (!password) {
+            message.textContent = "Password is required.";
+            message.style.display = 'block';
+            return;
+        }
+
+        try {
+            const response = await fetch('http://127.0.0.1:5000/api/signup', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ password: password })
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                alert(result.message);
+                showLoginForm();
+            } else {
+                message.textContent = result.message;
+                message.style.display = 'block';
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            message.textContent = "Could not connect to the server. Please ensure the backend is running.";
+            message.style.display = 'block';
+        }
+    }
+
+    function hideAllEmployeeSections() {
+        document.getElementById('profileSection').style.display = 'none';
+        document.getElementById('generalEmployeeSection').style.display = 'none';
+        document.getElementById('managerSection').style.display = 'none';
+        document.getElementById('adminSection').style.display = 'none';
+    }
+    
+    // --- Competitor Management Functions ---
+
+    async function displayCompetitors() {
+        const competitorList = document.getElementById('competitorList');
+        competitorList.innerHTML = '';
+        
+        try {
+            const response = await fetch('http://127.0.0.1:5000/api/competitors');
+            allCompetitors = await response.json();
+
+            // Filter the list based on the search query
+            filterCompetitors();
+        } catch (error) {
+            console.error('Error fetching competitors:', error);
+            competitorList.innerHTML = `<li><strong style="color:red;">Error: Could not load competitors.</strong></li>`;
+        }
+    }
+
+    // Function to filter competitors based on search input
+    function filterCompetitors() {
+        const competitorList = document.getElementById('competitorList');
+        const searchQuery = document.getElementById('competitorSearch').value.toLowerCase();
+        
+        competitorList.innerHTML = ''; // Clear the current list
+        
+        const filteredCompetitors = allCompetitors.filter(comp => 
+            comp.name.toLowerCase().includes(searchQuery) ||
+            comp.id.toLowerCase().includes(searchQuery) ||
+            comp.nationality.toLowerCase().includes(searchQuery)
+        );
+
+        if (filteredCompetitors.length > 0) {
+            filteredCompetitors.forEach(comp => {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `
+                    <div>
+                        <strong>Name:</strong> ${comp.name} | <strong>ID:</strong> ${comp.id} | <strong>Nationality:</strong> ${comp.nationality}
+                        <span class="competitor-status-badge competitor-status-${comp.status.toLowerCase()}">${comp.status}</span>
+                    </div>
+                    <div>
+                        <button onclick="showCompetitorProfileModal('${comp.id}')" class="view-btn">View Profile</button>
+                        <button onclick="showEditCompetitorModal('${comp.name}', '${comp.id}', '${comp.status}', '${comp.nationality}')" class="edit-btn">Edit</button>
+                        <button onclick="removeCompetitor('${comp.id}')" class="remove-btn">Remove</button>
+                    </div>
+                `;
+                competitorList.appendChild(listItem);
+            });
+        } else {
+            competitorList.innerHTML = '<li>No competitors found.</li>';
+        }
+    }
+
+    async function addCompetitor() {
+        const newName = document.getElementById('newCompetitorName').value;
+        const newId = document.getElementById('newCompetitorId').value;
+        const newNationality = document.getElementById('newCompetitorNationality').value;
+        const newStatus = document.getElementById('newCompetitorStatus').value;
+
+        if (!newName || !newId || !newNationality) {
+            alert("Name, ID, and Nationality are required.");
+            return;
+        }
+
+        try {
+            const response = await fetch('http://127.0.0.1:5000/api/competitors/add', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name: newName, id: newId, status: newStatus, nationality: newNationality })
+            });
+            const result = await response.json();
+            
+            if (result.success) {
+                alert(result.message);
+                document.getElementById('newCompetitorName').value = '';
+                document.getElementById('newCompetitorId').value = '';
+                document.getElementById('newCompetitorNationality').value = '';
+                displayCompetitors();
+            } else {
+                alert(result.message);
+            }
+        } catch (error) {
+            console.error('Error adding competitor:', error);
+            alert("Could not add competitor. Please check your backend connection.");
+        }
+    }
+
+    async function removeCompetitor(id) {
+        if (!confirm(`Are you sure you want to remove competitor with ID ${id}?`)) {
+            return;
+        }
+        try {
+            const response = await fetch('http://127.0.0.1:5000/api/competitors/remove', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id: id })
+            });
+            const result = await response.json();
+
+            if (result.success) {
+                alert(result.message);
+                displayCompetitors();
+            } else {
+                alert(result.message);
+            }
+        } catch (error) {
+            console.error('Error removing competitor:', error);
+            alert("Could not remove competitor. Please check your backend connection.");
+        }
+    }
+
+    function showEditCompetitorModal(name, id, status, nationality) {
+        document.getElementById('originalCompetitorId').value = id;
+        document.getElementById('editedCompetitorName').value = name;
+        document.getElementById('editedCompetitorId').value = id;
+        document.getElementById('editedCompetitorStatus').value = status;
+        document.getElementById('editedCompetitorNationality').value = nationality;
+        document.getElementById('editCompetitorModal').style.display = 'flex';
+    }
+
+    function hideEditCompetitorModal() {
+        document.getElementById('editCompetitorModal').style.display = 'none';
+    }
+
+    async function editCompetitor() {
+        const originalId = document.getElementById('originalCompetitorId').value;
+        const newName = document.getElementById('editedCompetitorName').value;
+        const newId = document.getElementById('editedCompetitorId').value;
+        const newStatus = document.getElementById('editedCompetitorStatus').value;
+        const newNationality = document.getElementById('editedCompetitorNationality').value;
+
+        if (!newName || !newId || !newStatus || !newNationality) {
+            alert("All fields are required.");
+            return;
+        }
+
+        try {
+            const response = await fetch('http://127.0.0.1:5000/api/competitors/edit', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    original_id: originalId,
+                    new_name: newName,
+                    new_id: newId,
+                    new_status: newStatus,
+                    new_nationality: newNationality
+                })
+            });
+            const result = await response.json();
+
+            if (result.success) {
+                alert(result.message);
+                displayCompetitors();
+                hideEditCompetitorModal();
+            } else {
+                alert(result.message);
+            }
+        } catch (error) {
+            console.error('Error editing competitor:', error);
+            alert("Could not save changes. Please check your backend connection.");
+        }
+    }
+    
+    async function showCompetitorProfileModal(competitorId) {
+        const modal = document.getElementById('competitorProfileModal');
+        const title = document.getElementById('profileModalTitle');
+        const details = document.getElementById('profileModalDetails');
+        
+        details.innerHTML = '<p>Loading profile...</p>';
+        modal.style.display = 'flex';
+
+        try {
+            const response = await fetch(`http://127.0.0.1:5000/api/competitors/${encodeURIComponent(competitorId)}/profile`);
+            if (!response.ok) {
+                throw new Error('Failed to fetch competitor profile.');
+            }
+            const profile = await response.json();
+            
+            title.textContent = profile.name;
+            let competitionsHtml = '<ul>';
+            if (profile.competitions.length > 0) {
+                profile.competitions.forEach(comp => {
+                    competitionsHtml += `<li><strong>${comp.name}</strong> - ${comp.date} (${comp.location})</li>`;
+                });
+            } else {
+                competitionsHtml += '<li>No competition history found.</li>';
+            }
+            competitionsHtml += '</ul>';
+
+            details.innerHTML = `
+                <p><strong>ID:</strong> ${profile.id}</p>
+                <p><strong>Nationality:</strong> ${profile.nationality}</p>
+                <p><strong>Status:</strong> <span class="competitor-status-badge competitor-status-${profile.status.toLowerCase()}">${profile.status}</span></p>
+                <h4>Competition History:</h4>
+                ${competitionsHtml}
+            `;
+        } catch (error) {
+            console.error('Error fetching competitor profile:', error);
+            title.textContent = "Profile Not Found";
+            details.innerHTML = '<p>There was an error loading the competitor profile. Please try again later.</p>';
+        }
+    }
+
+    function hideCompetitorProfileModal() {
+        document.getElementById('competitorProfileModal').style.display = 'none';
+    }
+
+
+    // --- User Management Functions (Connected to the backend) ---
+
+    async function displayUsers() {
+        const userList = document.getElementById('userList');
+        userList.innerHTML = '';
+        
+        try {
+            const response = await fetch('http://127.0.0.1:5000/api/users');
+            const users = await response.json();
+
+            users.forEach(user => {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `<strong>Password:</strong> ${user.password} | <strong>Role:</strong> ${user.role} <button onclick="removeUser('${user.password}')">Remove</button>`;
+                userList.appendChild(listItem);
+            });
+        } catch (error) {
+            console.error('Error fetching users:', error);
+            userList.innerHTML = `<li><strong style="color:red;">Error: Could not load users.</strong></li>`;
+        }
+    }
+
+    async function addUser() {
+        const newPassword = document.getElementById('newUserPassword').value;
+        const newRole = document.getElementById('newUserRole').value;
+
+        if (!newPassword) {
+            alert("Please enter a password.");
+            return;
+        }
+
+        try {
+            const response = await fetch('http://127.0.0.1:5000/api/users/add', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ password: newPassword, role: newRole })
+            });
+            const result = await response.json();
+            
+            if (result.success) {
+                alert(result.message);
+                displayUsers();
+            } else {
+                alert(result.message);
+            }
+        } catch (error) {
+            console.error('Error adding user:', error);
+            alert("Could not add user. Please check your backend connection.");
+        }
+    }
+
+    async function removeUser(password) {
+        if (!confirm(`Are you sure you want to remove user with password '${password}'?`)) {
+            return;
+        }
+        try {
+            const response = await fetch('http://127.0.0.1:5000/api/users/remove', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ password: password })
+            });
+            const result = await response.json();
+
+            if (result.success) {
+                alert(result.message);
+                displayUsers();
+            } else {
+                alert(result.message);
+            }
+        } catch (error) {
+            console.error('Error removing user:', error);
+            alert("Could not remove user. Please check your backend connection.");
+        }
+    }
+
+    // --- Competition Management Functions ---
+
+    // Function to load all competitions from the backend on page load
+    async function loadCompetitions() {
+        const competitionsGrid = document.getElementById('competitionsGrid');
+        competitionsGrid.innerHTML = '';
+
+        try {
+            const response = await fetch('http://127.0.0.1:5000/api/competitions');
+            const allCompetitions = await response.json();
+
+            allCompetitions.forEach(comp => {
+                const card = document.createElement('div');
+                card.className = 'competition-card';
+                
+                let cardContent = `
+                    <h3>${comp.name}</h3>
+                    <p><strong>Date:</strong> ${comp.date}</p>
+                    <p><strong>Location:</strong> ${comp.location}</p>
+                    <span class="status-badge status-${comp.status.toLowerCase().replace(' ', '-')}">${comp.status}</span>
+                    <a onclick="showDetails('${comp.name}', '${comp.date}', '${comp.location}', '${comp.description}', '${comp.status}')" class="details-btn">View Details</a>
+                `;
+
+                if (currentUserRole === 'admin') {
+                    cardContent += `
+                        <button onclick="removeCompetition('${comp.name}')" class="remove-btn">Remove</button>
+                        <button onclick="showEditModal('${comp.name}', '${comp.date}', '${comp.location}', '${comp.description}', '${comp.status}')" class="edit-btn">Edit</button>
+                    `;
+                }
+
+                card.innerHTML = cardContent;
+                competitionsGrid.appendChild(card);
+            });
+        } catch (error) {
+            console.error('Error loading competitions:', error);
+            competitionsGrid.innerHTML = `<div><h3 style="color:red;">Error: Could not load competitions.</h3></div>`;
+        }
+    }
+    
+    // Search bar function
+    async function filterCompetitions() {
+        const searchQuery = document.getElementById('competitionSearch').value.toLowerCase();
+        const competitionCards = document.getElementById('competitionsGrid').getElementsByClassName('competition-card');
+        
+        Array.from(competitionCards).forEach(card => {
+            const cardText = card.textContent.toLowerCase();
+            if (cardText.includes(searchQuery)) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    // Function to add a new competition via the backend API
+    async function addCompetition() {
+        const name = document.getElementById('competitionName').value;
+        const date = document.getElementById('competitionDate').value;
+        const location = document.getElementById('competitionLocation').value;
+        const description = document.getElementById('competitionDescription').value;
+
+        if (!name || !date || !location || !description) {
+            alert("All competition fields are required.");
+            return;
+        }
+
+        try {
+            const response = await fetch('http://127.0.0.1:5000/api/competitions/add', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, date, location, description })
+            });
+            const result = await response.json();
+
+            if (result.success) {
+                alert(result.message);
+                loadCompetitions();
+            } else {
+                alert(result.message);
+            }
+        } catch (error) {
+            console.error('Error adding competition:', error);
+            alert("Could not add competition. Please check your backend connection.");
+        }
+    }
+    
+    // Function to remove a competition via the backend API
+    async function removeCompetition(name) {
+        if (!confirm(`Are you sure you want to remove the competition '${name}'?`)) {
+            return;
+        }
+        try {
+            const response = await fetch('http://127.0.0.1:5000/api/competitions/remove', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name: name })
+            });
+            const result = await response.json();
+
+            if (result.success) {
+                alert(result.message);
+                loadCompetitions();
+            } else {
+                alert(result.message);
+            }
+        } catch (error) {
+            console.error('Error removing competition:', error);
+            alert("Could not remove competition. Please check your backend connection.");
+        }
+    }
+    
+    // Function to show the edit modal with pre-filled data
+    function showEditModal(name, date, location, description, status) {
+        const modal = document.getElementById('editModal');
+        document.getElementById('originalCompetitionName').value = name;
+        document.getElementById('editedCompetitionName').value = name;
+        document.getElementById('editedCompetitionDate').value = date;
+        document.getElementById('editedCompetitionLocation').value = location;
+        document.getElementById('editedCompetitionDescription').value = description;
+        document.getElementById('editedCompetitionStatus').value = status;
+        modal.style.display = 'flex';
+    }
+
+    function hideEditModal() {
+        document.getElementById('editModal').style.display = 'none';
+        document.getElementById('originalCompetitionName').value = '';
+    }
+    
+    // Update the editCompetition function to include the status
+    async function editCompetition() {
+        const originalName = document.getElementById('originalCompetitionName').value;
+        const newName = document.getElementById('editedCompetitionName').value;
+        const newDate = document.getElementById('editedCompetitionDate').value;
+        const newLocation = document.getElementById('editedCompetitionLocation').value;
+        const newDescription = document.getElementById('editedCompetitionDescription').value;
+        const newStatus = document.getElementById('editedCompetitionStatus').value;
+
+        try {
+            const response = await fetch('http://127.0.0.1:5000/api/competitions/edit', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    original_name: originalName,
+                    new_name: newName,
+                    new_date: newDate,
+                    new_location: newLocation,
+                    new_description: newDescription,
+                    new_status: newStatus
+                })
+            });
+            const result = await response.json();
+            
+            if (result.success) {
+                alert(result.message);
+                loadCompetitions();
+                hideEditModal();
+            } else {
+                alert(result.message);
+            }
+        } catch (error) {
+            console.error('Error saving changes:', error);
+            alert("Could not save changes. Please check your backend connection.");
+        }
+    }
+
+    function showAddCompetitorModal() {
+        document.getElementById('editModal').style.display = 'none'; // Hide edit modal
+        document.getElementById('addCompetitorModal').style.display = 'flex'; // Show add modal
+        
+        // Get the competition name from the hidden input in the edit modal
+        const competitionName = document.getElementById('originalCompetitionName').value;
+        document.getElementById('competitionNameToAddCompetitor').value = competitionName;
+        document.getElementById('competitionNameInAddModal').textContent = competitionName;
+
+        // Populate the dropdown with competitors
+        const select = document.getElementById('addCompetitorSelect');
+        select.innerHTML = '<option value="">-- Select Competitor --</option>'; // Reset options
+        allCompetitors.forEach(comp => {
+            const option = document.createElement('option');
+            option.value = comp.id;
+            option.textContent = `${comp.name} (${comp.nationality})`;
+            select.appendChild(option);
+        });
+    }
+
+    function hideAddCompetitorModal() {
+        document.getElementById('addCompetitorModal').style.display = 'none';
+        document.getElementById('editModal').style.display = 'flex'; // Show edit modal again
+    }
+
+    async function addCompetitorToCompetition() {
+        const competitionName = document.getElementById('competitionNameToAddCompetitor').value;
+        const competitorId = document.getElementById('addCompetitorSelect').value;
+        
+        if (!competitorId) {
+            alert("Please select a competitor.");
+            return;
+        }
+
+        try {
+            const response = await fetch('http://127.0.0.1:5000/api/competitions/add_competitor', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ competition_name: competitionName, competitor_id: competitorId })
+            });
+            const result = await response.json();
+            alert(result.message);
+            hideAddCompetitorModal();
+        } catch (error) {
+            console.error('Error assigning competitor:', error);
+            alert("Could not assign competitor. Please check your backend connection.");
+        }
+    }
+
+    // Hide modals when clicking outside
+    window.onclick = function(event) {
+        if (event.target == document.getElementById('detailsModal')) {
+            hideDetails();
+        }
+        if (event.target == document.getElementById('loginModal')) {
+            hideLoginModal();
+        }
+        if (event.target == document.getElementById('editModal')) {
+            hideEditModal();
+        }
+        if (event.target == document.getElementById('editCompetitorModal')) {
+            hideEditCompetitorModal();
+        }
+        if (event.target == document.getElementById('addCompetitorModal')) {
+            hideAddCompetitorModal();
+        }
+        if (event.target == document.getElementById('competitorProfileModal')) {
+            hideCompetitorProfileModal();
+        }
+    }
+</script>
+
+</body>
+</html>
